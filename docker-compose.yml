@@ -1,0 +1,13 @@
+services:
+  redis:
+    image: redis:7.4.1-alpine3.20
+    container_name: ocpp-bridge-redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    restart: always
+
+volumes:
+  redis-data:
