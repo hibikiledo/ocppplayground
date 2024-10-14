@@ -49,6 +49,20 @@ func HandleOcpp1_6(ctx context.Context, cpConn *websocket.Conn, cpIdentity strin
 			select {
 			case cpCall := <-callFromCpCh:
 				rdb.Publish(ctx, GetCpOutCpName(cpIdentity), cpCall.ToString())
+			case csCallResult := <-callResultFromCsCh:
+				err := cpConn.WriteMessage(websocket.TextMessage, []byte(csCallResult.ToString()))
+				if err != nil {
+					slog.Error("cannot write call result from cs to cp", "err", err)
+					ctx.Done()
+					return
+				}
+			case csCallError := <-callErrorFromCsCh:
+				err := cpConn.WriteMessage(websocket.TextMessage, []byte(csCallError.ToString()))
+				if err != nil {
+					slog.Error("cannot write call error from cs to cp", "err", err)
+					ctx.Done()
+					return
+				}
 			case <-ctx.Done():
 				return
 			}
@@ -143,8 +157,8 @@ func receiveCsMessages(
 		Addr: "localhost:6380",
 	})
 
-	cpInCh := fmt.Sprintf("cp:%s/in", cpIdentity)
-	sub := rdb.Subscribe(ctx, cpInCh)
+	cpInChName := GetCpInChName(cpIdentity)
+	sub := rdb.Subscribe(ctx, cpInChName)
 	defer sub.Close()
 
 	ch := sub.Channel()

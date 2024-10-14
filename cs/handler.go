@@ -28,7 +28,7 @@ func HandleCs(ctx context.Context, csConn *websocket.Conn, cpIdentity string) {
 			case cpInChName:
 				err := csConn.WriteMessage(
 					websocket.TextMessage,
-					[]byte(">"+msg.Payload),
+					[]byte("i"+msg.Payload),
 				)
 				if err != nil {
 					slog.Error("Cannot write message from cpInCh to websocket", "err", err)
@@ -38,10 +38,10 @@ func HandleCs(ctx context.Context, csConn *websocket.Conn, cpIdentity string) {
 			case cpOutChName:
 				err := csConn.WriteMessage(
 					websocket.TextMessage,
-					[]byte("<"+msg.Payload),
+					[]byte("o"+msg.Payload),
 				)
 				if err != nil {
-					slog.Error("Cannot write message from cpInCh to websocket", "err", err)
+					slog.Error("Cannot write message from cpOutCh to websocket", "err", err)
 					ctx.Done()
 					return
 				}

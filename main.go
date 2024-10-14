@@ -12,7 +12,7 @@ func main() {
 	logger := slog.New(slog.NewJSONHandler(os.Stderr, &slog.HandlerOptions{}))
 	slog.SetDefault(logger)
 
-	http.HandleFunc("/ocppj/cp/{identity}", ocpp1_6.UpgradeToOcpp1_6)
+	http.HandleFunc("/ocppj/{identity}", ocpp1_6.UpgradeToOcpp1_6)
 	http.HandleFunc("/cs/{identity}", cs.UpgradeToWebsocket)
 
 	http.ListenAndServe(":8888", nil)
