@@ -1,9 +1,6 @@
-app: ocpp-playground
-
 services:
   redis:
     image: redis:7.4.1-alpine3.20
-    container_name: ocpp-bridge-redis
     ports:
       - "${REDIS_HOST_PORT}:6379"
     volumes:
@@ -13,9 +10,12 @@ services:
     build: ./server
     ports:
       - "${SERVER_HOST_PORT}:8080"
+    environment:
+      REDIS_CONNECTION_STRING: "redis://default@redis:6379"
     restart: always
   web:
     build: ./web
+    ports:
       - "${WEB_APP_HOST_PORT}:80"
     restart: always
 
