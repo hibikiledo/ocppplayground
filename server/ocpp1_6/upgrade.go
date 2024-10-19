@@ -24,6 +24,8 @@ func UpgradeToOcpp1_6(w http.ResponseWriter, req *http.Request) {
 		"headers", &req.Header)
 	ctx, _ := context.WithCancel(context.Background())
 
+	log.Info("New connection")
+
 	if ok := config.CheckCpIdentity(cpIdentity); !ok {
 		w.WriteHeader(404)
 		log.Error(fmt.Sprintf("Charge point identity %s is not found", cpIdentity))
