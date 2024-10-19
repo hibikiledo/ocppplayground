@@ -102,6 +102,13 @@ func HandleOcpp1_6(ctx context.Context, cpConn *websocket.Conn, cpIdentity strin
 	if err := cpConn.Close(); err != nil {
 		slog.Error("Failed to close websocket connection")
 	}
+
+	close(callFromCpCh)
+	close(callResultFromCpCh)
+	close(callErrorFromCpCh)
+	close(callFromCsCh)
+	close(callResultFromCsCh)
+	close(callErrorFromCsCh)
 }
 
 func receiveCpMessages(
