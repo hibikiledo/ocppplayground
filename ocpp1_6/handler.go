@@ -9,6 +9,7 @@ import (
 	"ocppplayground/ocpp1_6/message"
 	"ocppplayground/ocpp1_6/parser"
 	"ocppplayground/ocpp1_6/rpc"
+	"os"
 	"strings"
 	"time"
 
@@ -40,7 +41,9 @@ func HandleOcpp1_6(ctx context.Context, cpConn *websocket.Conn, cpIdentity strin
 	)
 
 	rdb := redis.NewClient(&redis.Options{
-		Addr: "localhost:6380",
+		Addr:     os.Getenv("REDIS_HOST_AND_PORT"),
+		Username: os.Getenv("REDIS_USERNAME"),
+		Password: os.Getenv("REDIS_PASSWORD"),
 	})
 
 	// Handle charge point initiated messages

@@ -6,6 +6,10 @@
 app = 'ocppplayground'
 primary_region = 'sin'
 
+[env]
+  REDIS_USERNAME = 'default'
+  REDIS_HOST_AND_PORT = 'fly-ocppplayground.upstash.io:6379'
+
 [build]
 
 [http_service]
