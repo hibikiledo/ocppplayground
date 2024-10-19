@@ -160,9 +160,8 @@ func receiveCsMessages(
 	callResultFromCsCh chan message.OcppCallResult,
 	callErrorFromCsCh chan message.OcppCallError,
 ) {
-	rdb := redis.NewClient(&redis.Options{
-		Addr: "localhost:6380",
-	})
+	rdbConOpts, _ := redis.ParseURL(os.Getenv("REDIS_CONNECTION_STRING"))
+	rdb := redis.NewClient(rdbConOpts)
 
 	cpInChName := GetCpInChName(cpIdentity)
 	sub := rdb.Subscribe(ctx, cpInChName)

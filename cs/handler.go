@@ -6,15 +6,15 @@ import (
 	"ocppplayground/ocpp1_6"
 	"ocppplayground/ocpp1_6/message"
 	"ocppplayground/ocpp1_6/parser"
+	"os"
 
 	"github.com/gorilla/websocket"
 	"github.com/redis/go-redis/v9"
 )
 
 func HandleCs(ctx context.Context, csConn *websocket.Conn, cpIdentity string) {
-	rdb := redis.NewClient(&redis.Options{
-		Addr: "localhost:6380",
-	})
+	rdbConOpts, _ := redis.ParseURL(os.Getenv("REDIS_CONNECTION_STRING"))
+	rdb := redis.NewClient(rdbConOpts)
 
 	cpInChName := ocpp1_6.GetCpInChName(cpIdentity)
 	cpOutChName := ocpp1_6.GetCpOutCpName(cpIdentity)
