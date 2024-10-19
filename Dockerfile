@@ -22,6 +22,8 @@ RUN apk --no-cache add ca-certificates
 
 WORKDIR /root/
 
+EXPOSE 8080
+
 # Copy the pre-built binary file from the previous stage
 COPY --from=builder /app/main .
 
