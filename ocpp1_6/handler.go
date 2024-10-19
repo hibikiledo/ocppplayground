@@ -40,11 +40,8 @@ func HandleOcpp1_6(ctx context.Context, cpConn *websocket.Conn, cpIdentity strin
 		callErrorFromCsCh,
 	)
 
-	rdb := redis.NewClient(&redis.Options{
-		Addr:     os.Getenv("REDIS_HOST_AND_PORT"),
-		Username: os.Getenv("REDIS_USERNAME"),
-		Password: os.Getenv("REDIS_PASSWORD"),
-	})
+	rdbConOpts, _ := redis.ParseURL(os.Getenv("REDIS_CONNECTION_STRING"))
+	rdb := redis.NewClient(rdbConOpts)
 
 	// Handle charge point initiated messages
 	go func() {
