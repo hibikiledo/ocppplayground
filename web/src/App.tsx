@@ -87,11 +87,11 @@ function App() {
         </Link>
         <Link
           size="sm"
-          href="https://github.com/hibikiledo/ocppplayground/blob/main/LICENSE"
+          href="https://buymeacoffee.com/nutratthanan"
           className="text-foreground-400"
           target="_blank"
         >
-          MIT License
+          Donate ♥️
         </Link>
       </footer>
     </div>
