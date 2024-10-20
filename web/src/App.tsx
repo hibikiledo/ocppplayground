@@ -1,4 +1,4 @@
-import { Button, Chip, Input } from "@nextui-org/react";
+import { Button, Chip, Code, Input } from "@nextui-org/react";
 import { useMemo, useRef, useState } from "react";
 import { OcppMessageStream } from "./components/OcppMessageStream";
 import { Status, useConnection } from "./hooks/useConnection";
@@ -26,23 +26,47 @@ function App() {
 
   return (
     <div className="fixed inset-0 grid items-center justfy-center">
-      <form
-        className="grid min-w-[300px] grid-cols-1 gap-y-3 mx-auto"
-        onSubmit={(e) => {
-          e.preventDefault();
-          setActiveCpIdentity(cpIdentity);
-        }}
-      >
-        <Input
-          type="text"
-          label="Charge Point Identity"
-          value={cpIdentity}
-          onChange={(e) => setCpIdentity(e.currentTarget.value)}
-        />
-        <Button color="primary" variant="shadow" type="submit">
-          Start
-        </Button>
-      </form>
+      <main className="flex flex-col items-center gap-4">
+        <form
+          className="grid w-[300px] grid-cols-1 gap-y-3 mx-auto"
+          onSubmit={(e) => {
+            e.preventDefault();
+            setActiveCpIdentity(cpIdentity);
+          }}
+        >
+          <Input
+            type="text"
+            label="Charge Point Identity"
+            value={cpIdentity}
+            onChange={(e) => setCpIdentity(e.currentTarget.value)}
+          />
+          <Button color="primary" variant="shadow" type="submit">
+            Start
+          </Button>
+        </form>
+        <div className="w-[300px] flex flex-col gap-2">
+          <h2 className="text-sm font-semibold">Supported Protocols</h2>
+          <p className="text-sm text-foreground-500">OCPPJ 1.6</p>
+        </div>
+        <div className="w-[300px] flex flex-col gap-2">
+          <h2 className="text-sm font-semibold">Central System URL</h2>
+          <p className="text-sm text-foreground-500">
+            The demo server provides two central system URLs as some charge
+            point models do not support WSS.
+          </p>
+          <div className="flex flex-col gap-1">
+            <div className="text-xs font-semibold">WS (Plain Websocket)</div>
+            <Code>ws://ocppws.evtoolbox.app/ocppj</Code>
+          </div>
+          <div className="flex flex-col gap-1">
+            <div className="text-xs font-semibold">
+              WSS (Websocket over TLS)
+            </div>
+            <Code>wss://ocpp.evtoolbox.app/ocppj</Code>
+          </div>
+        </div>
+      </main>
+      <footer></footer>
     </div>
   );
 }
