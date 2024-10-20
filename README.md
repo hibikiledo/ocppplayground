@@ -10,10 +10,10 @@ In actual business use cases, you would need to implement your own central syste
 
 ### Data Handling
 1. No data is stored on the server. The only persistence used here is Redis PubSub.
-2. Nginx access logs and error logs are kept for 1 week. These logs may include your charge point identifier.
-3. OCPP messages are not stored anywhere. It is not logged anywhere.
+2. Nginx access logs and error logs are kept for a week. These logs include your charge point identity.
+3. OCPP messages are not stored anywhere.
 
-If you want absolute confidence in data handling, please self-host this yourself. Refer to the self-hosting section below.
+If you want absolute control in data handling, please self-host this yourself. Refer to the self-hosting section below.
 
 ### Limitations
 1. Multiple web app users connecting to the same charge point identity is not supported.
