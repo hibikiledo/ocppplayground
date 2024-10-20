@@ -1,4 +1,4 @@
-import { Button, Chip, Code, Input } from "@nextui-org/react";
+import { Button, Chip, Code, Input, Link } from "@nextui-org/react";
 import { useMemo, useRef, useState } from "react";
 import { OcppMessageStream } from "./components/OcppMessageStream";
 import { Status, useConnection } from "./hooks/useConnection";
@@ -25,8 +25,8 @@ function App() {
   }
 
   return (
-    <div className="fixed inset-0 grid items-center justfy-center">
-      <main className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center justify-center min-h-screen gap-8 py-6">
+      <main className="flex flex-col items-center gap-8">
         <form
           className="grid w-[300px] grid-cols-1 gap-y-3 mx-auto"
           onSubmit={(e) => {
@@ -44,29 +44,56 @@ function App() {
             Start
           </Button>
         </form>
-        <div className="w-[300px] flex flex-col gap-2">
-          <h2 className="text-sm font-semibold">Supported Protocols</h2>
-          <p className="text-sm text-foreground-500">OCPPJ 1.6</p>
-        </div>
-        <div className="w-[300px] flex flex-col gap-2">
-          <h2 className="text-sm font-semibold">Central System URL</h2>
-          <p className="text-sm text-foreground-500">
-            The demo server provides two central system URLs as some charge
-            point models do not support WSS.
-          </p>
-          <div className="flex flex-col gap-1">
-            <div className="text-xs font-semibold">WS (Plain Websocket)</div>
-            <Code>ws://ocppws.evtoolbox.app/ocppj</Code>
+        <div className="flex flex-col gap-4">
+          <div className="w-[300px] flex flex-col gap-2">
+            <h2 className="text-sm font-semibold">Supported Protocols</h2>
+            <p className="text-sm text-foreground-500">OCPPJ 1.6</p>
           </div>
-          <div className="flex flex-col gap-1">
-            <div className="text-xs font-semibold">
-              WSS (Websocket over TLS)
+          <div className="w-[300px] flex flex-col gap-2">
+            <h2 className="text-sm font-semibold">Central System URL</h2>
+            <p className="text-sm text-foreground-500">
+              The demo server provides two central system URLs as some charge
+              point models do not support WSS.
+            </p>
+            <div className="flex flex-col gap-1 mt-2">
+              <div className="text-xs font-semibold">WS (Plain Websocket)</div>
+              <Code>ws://ocppws.evtoolbox.app/ocppj</Code>
             </div>
-            <Code>wss://ocpp.evtoolbox.app/ocppj</Code>
+            <div className="flex flex-col gap-1">
+              <div className="text-xs font-semibold">
+                WSS (Websocket over TLS)
+              </div>
+              <Code>wss://ocpp.evtoolbox.app/ocppj</Code>
+            </div>
           </div>
         </div>
       </main>
-      <footer></footer>
+      <footer className="w-[300px] text-center text-foreground-400 flex flex-wrap gap-4">
+        <Link
+          size="sm"
+          href="https://github.com/hibikiledo/ocppplayground"
+          className="text-foreground-400"
+          target="_blank"
+        >
+          Github
+        </Link>
+        <Link
+          size="sm"
+          href="https://github.com/hibikiledo/ocppplayground/blob/main/docker-compose.production.yml"
+          className="text-foreground-400"
+          target="_blank"
+        >
+          Self-Hosting
+        </Link>
+        <Link
+          size="sm"
+          href="https://github.com/hibikiledo/ocppplayground/blob/main/LICENSE"
+          className="text-foreground-400"
+          target="_blank"
+        >
+          MIT License
+        </Link>
+      </footer>
     </div>
   );
 }
