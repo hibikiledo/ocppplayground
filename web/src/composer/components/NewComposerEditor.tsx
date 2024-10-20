@@ -13,11 +13,16 @@ export const NewComposerEditor = (props: {
   const [evalError, setEvalError] = useState<string>();
   const [evalResult, setEvalResult] = useState<string>();
   const safeEval = (str: string) => {
+    if (str.length === 0) {
+      setEvalResult(undefined);
+      setEvalError(undefined);
+      return;
+    }
+
     try {
       setEvalResult(eval(`const r=${str};r`));
       setEvalError(undefined);
     } catch (err) {
-      console.error(err);
       setEvalResult(undefined);
       setEvalError(String(err));
     }
