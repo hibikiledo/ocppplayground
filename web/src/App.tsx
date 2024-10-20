@@ -10,7 +10,7 @@ import { useColumnResize } from "./hooks/useColumnResize";
 
 function App() {
   const [cpIdentity, setCpIdentity] = useState("");
-  const [activeCpIdentity, setActiveCpIdentity] = useState("123");
+  const [activeCpIdentity, setActiveCpIdentity] = useState("");
 
   if (activeCpIdentity) {
     return (
