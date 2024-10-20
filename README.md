@@ -21,6 +21,8 @@ https://ocpp.evtoolbox.app
 4. On the demo site, Click 'Start'
 5. Wait for your first message to arrive
 
+The default central system behavior can be modified by clicking respectative 'Configure' button on the web app UI. The default configuration should already allow your charge point to connect to the central system.
+
 ### Self-hosting
 You can run this project using `docker-compose.production.yml` file.
 
